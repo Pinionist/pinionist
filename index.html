@@ -70,6 +70,7 @@
             padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
+            background: #333;
         }
 
         .video-wrapper iframe {
@@ -78,6 +79,16 @@
             left: 0;
             width: 100%;
             height: 100%;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            background: #333;
         }
 
         .video-info {
@@ -113,6 +124,11 @@
             top: 0;
             left: 0;
             width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 0.9rem;
         }
 
         @keyframes loading {
@@ -133,12 +149,25 @@
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
+
+            .nav {
+                float: right;
+                top: 10rem;
+                right: 10rem;
+                z-index: 1000;
+            }
+
+            .subtitle {
+                font-size: 0.75rem;
+                opacity: 0.9;
+                font-weight: 150;
+            }
         }
 
         .nav {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
+            float: right;
+            top: 1rem;
+            right: 1rem;
             z-index: 1000;
         }
 
@@ -147,7 +176,7 @@
             text-decoration: none;
             padding: 0.5rem 1rem;
             background: rgba(255,255,255,0.2);
-            border-radius: 25px;
+            border-radius: 12px;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
@@ -157,89 +186,16 @@
             transform: translateY(-2px);
         }
 
-        .video-wrapper video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            background: #333;
-        }
-
-        /* Hide all native video controls initially */
-        .video-wrapper video::-webkit-media-controls {
-            display: none !important;
-        }
-
-        .video-wrapper video::-webkit-media-controls-enclosure {
-            display: none !important;
-        }
-
-        .video-wrapper video::-webkit-media-controls-panel {
-            display: none !important;
-        }
-
-        .video-wrapper video::-webkit-media-controls-play-button {
-            display: none !important;
-        }
-
-        .video-wrapper video::-webkit-media-controls-start-playback-button {
-            display: none !important;
-        }
-
-        /* Firefox */
-        .video-wrapper video::-moz-media-controls {
-            display: none !important;
-        }
-
-        /* Remove controls attribute initially and add it back when playing */
-        .video-wrapper video[data-initial] {
-            pointer-events: auto;
-        }
-
-        /* Custom play button overlay */
-        .video-wrapper::before {
-            content: '▶';
+        .error-message {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 3rem;
-            color: rgba(255, 255, 255, 0.8);
+            color: #ff6b6b;
+            font-size: 0.9rem;
+            text-align: center;
             z-index: 10;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
         }
-
-        .video-wrapper:hover::before {
-            opacity: 1;
-            color: rgba(255, 255, 255, 1);
-        }
-
-        /* Hide custom play button when video is playing */
-        .video-wrapper.playing::before {
-            display: none;
-        }
-
-        /* Show native controls only when playing */
-        .video-wrapper.playing video::-webkit-media-controls {
-            display: flex !important;
-        }
-
-        .video-wrapper.playing video::-webkit-media-controls-enclosure {
-            display: flex !important;
-        }
-
-        .video-wrapper.playing video::-webkit-media-controls-panel {
-            display: flex !important;
-        }
-
-        .video-wrapper.playing video::-moz-media-controls {
-            display: block !important;
-        }
-        
     </style>
 </head>
 <body>
@@ -250,15 +206,21 @@
 
     <div class="container">
         <header>
+            <h1></h1>
             <h1>Pinionist</h1>
             <p class="subtitle">Collection of VFX work by Pavle Milicevic</p>
         </header>
 
-<div class="video-grid">
-<div class="video-card">
+        <div class="video-grid">
+            <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/athletes_code.jpg" data-src="videos/athletes_code.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/athletes_code.jpg" 
+                        data-src="videos/athletes_code.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -269,10 +231,15 @@
                 </div>
             </div>
 
-                        <div class="video-card">
+            <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/voslauer.jpg" data-src="videos/voslauer.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/voslauer.jpg" 
+                        data-src="videos/voslauer.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -285,8 +252,13 @@
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/congstar.jpg" data-src="videos/congstar.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/congstar.jpg" 
+                        data-src="videos/congstar.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -299,152 +271,204 @@
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/djarum.jpg" data-src="videos/djarum.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/djarum.jpg" 
+                        data-src="videos/djarum.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Djarum</h3>
+                    <h3 class="video-title">Congstar</h3>
                     <p class="video-description">Lead Compositing, Conform, Online</p>
                 </div>
             </div>
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/gmc.jpg" data-src="videos/gmc.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/gmc.jpg" 
+                        data-src="videos/gmc.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">GMC</h3>
+                    <h3 class="video-title">Congstar</h3>
                     <p class="video-description">Lead Compositing, Conform</p>
                 </div>
             </div>
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/kleks_moff.jpg" data-src="videos/kleks_moff.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/kleks_moff.jpg" 
+                        data-src="videos/kleks_moff.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Kleks Making Of</h3>
+                    <h3 class="video-title">Congstar</h3>
                     <p class="video-description">Lead Compositing</p>
                 </div>
             </div>
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/lv_moff.jpg" data-src="videos/lv_moff.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/lv.jpg" 
+                        data-src="videos/lv.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">LV Making Of</h3>
+                    <h3 class="video-title">Congstar</h3>
                     <p class="video-description">Lead Compositing</p>
                 </div>
             </div>
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/lv.jpg" data-src="videos/lv.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/lv_moff.jpg" 
+                        data-src="videos/lv_moff.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">LV</h3>
+                    <h3 class="video-title">Congstar</h3>
                     <p class="video-description">Lead Compositing</p>
                 </div>
             </div>
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/mm_moff.jpg" data-src="videos/mm_moff.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/mm_moff.jpg" 
+                        data-src="videos/mm_moff.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">MM Making Of</h3>
+                    <h3 class="video-title">Congstar</h3>
                     <p class="video-description">Lead Compositing, Conform, Online</p>
                 </div>
             </div>
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/pepsi_d_moff.jpg" data-src="videos/pepsi_d_moff.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/pepsi_d.jpg" 
+                        data-src="videos/pepsi_d.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Pepsi D Making Of</h3>
+                    <h3 class="video-title">Congstar</h3>
                     <p class="video-description">Lead Compositing, Conform, Online</p>
                 </div>
             </div>
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/pepsi_d.jpg" data-src="videos/pepsi_d.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/pepsi_d_moff.jpg" 
+                        data-src="videos/pepsi_d_moff.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Pepsi D</h3>
+                    <h3 class="video-title">Congstar</h3>
                     <p class="video-description">Lead Compositing, Conform, Online</p>
                 </div>
             </div>
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/pepsi_m_moff.jpg" data-src="videos/pepsi_m_moff.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/pepsi_m.jpg" 
+                        data-src="videos/pepsi_m.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Pepsi M Making Of</h3>
+                    <h3 class="video-title">Congstar</h3>
                     <p class="video-description">Lead Compositing, Conform, Online</p>
                 </div>
-            </div>
-
+            </div>            
+    
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <video preload="none" poster="videos/thumbnails/pepsi_m.jpg" data-src="videos/pepsi_m.mp4">
+                    <div class="loading-placeholder">Loading...</div>
+                    <video 
+                        controls 
+                        preload="metadata" 
+                        poster="videos/thumbnails/pepsi_m_moff.jpg" 
+                        data-src="videos/pepsi_m_moff.mp4"
+                        style="display: none;">
                         <source type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
                 <div class="video-info">
-                    <h3 class="video-title">Pepsi M</h3>
+                    <h3 class="video-title">Congstar</h3>
                     <p class="video-description">Lead Compositing, Conform, Online</p>
                 </div>
-            </div>
+            </div>            
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/984832952?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 984832952">
+                    <div class="loading-placeholder">Loading...</div>
+                    <iframe 
+                        data-src="https://player.vimeo.com/video/984832952?title=0&byline=0&portrait=0&badge=0&autopause=0" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen 
+                        title="Chessington We've Got It"
+                        style="display: none;">
                     </iframe>
                 </div>
                 <div class="video-info">
@@ -455,512 +479,19 @@
 
             <div class="video-card">
                 <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/915553943?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 915553943">
+                    <div class="loading-placeholder">Loading...</div>
+                    <iframe 
+                        data-src="https://player.vimeo.com/video/915553943?title=0&byline=0&portrait=0&badge=0&autopause=0" 
+                        frameborder="0" 
+                        allow="autoplay; fullscreen; picture-in-picture" 
+                        allowfullscreen 
+                        title="The Marias - Submarine Album Trailer"
+                        style="display: none;">
                     </iframe>
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">The Marias - Submarine Album Trailer</h3>
                     <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/892199428?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 892199428">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">MANSAM</h3>
-                    <p class="video-description">Compositing & Conform & DI & Online</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/888035912?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 888035912">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Match Masters Making of Breakdown</h3>
-                    <p class="video-description">Compositing & Conform & DI & Online</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/861981796?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 861981796">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Warszawianka Making of Breakdown</h3>
-                    <p class="video-description">Lead Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/815279084?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 815279084">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Lech Easy</h3>
-                    <p class="video-description">Compositing & Conform & Online</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/815278909?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 815278909">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Lech Free Active</h3>
-                    <p class="video-description">Compositing & Conform & Online</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/701652186?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 701652186">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Redefine Meat</h3>
-                    <p class="video-description">Compositing & Conform & Online</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/789694344?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 789694344">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Pracuj.pl Dzik</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/520871857?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 520871857">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Pracuj.pl Testimonial</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/507061294?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 507061294">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Pracuj.pl Jacek Owczarski</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/501726693?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 501726693">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Pracuj.pl Marian Halski</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/460133990?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 460133990">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Biedronka Fajniaki Water</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/406352087?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 406352087">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Pavle Milicevic Demo 2020</h3>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/261336612?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 261336612">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Winiary Misja Kaszotto</h3>
-                    <p class="video-description">Supervisor & Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/260971522?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 260971522">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Frostpunk City</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/260963770?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 260963770">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">MEDIA MARKT Christmas</h3>
-                    <p class="video-description">Lead Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/260962058?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 260962058">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">MEDIA MARKT Cart</h3>
-                    <p class="video-description">Lead Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/234403714?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 234403714">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Zubr Boars</h3>
-                    <p class="video-description">Lead Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/234396729?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 234396729">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Zubr Deer</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/234403643?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 234403643">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Shades of Blue</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/234396786?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 234396786">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">XTB</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/234396758?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 234396758">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">UNITEL</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/234396746?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 234396746">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">ION Trailer</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/234396713?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 234396713">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Fatima Teaser</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/231881519?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 231881519">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Popota</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/231881090?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 231881090">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Alivia Battle</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/231880605?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 231880605">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">PZU Niestraszki</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/231879322?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 231879322">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">PIRAEUS Bank Christmas</h3>
-                    <p class="video-description">On-Set Supervisor & Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/231876557?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 231876557">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">PIRAEUS Bank Yellows</h3>
-                    <p class="video-description">On-Set Supervisor & Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/234396738?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 234396738">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Biedronka Deer</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/234396777?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 234396777">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">Biedronka Bears</h3>
-                    <p class="video-description">Compositing</p>
-                </div>
-            </div>
-
-            <div class="video-card">
-                <div class="video-wrapper">
-                    <div class="loading-placeholder"></div>
-                    <iframe data-src="https://player.vimeo.com/video/59354379?title=0&byline=0&portrait=0&badge=0&autopause=0" 
-                            frameborder="0" 
-                            allow="autoplay; fullscreen; picture-in-picture" 
-                            allowfullscreen 
-                            title="Vimeo Video 59354379">
-                    </iframe>
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">ODEON ID</h3>
-                    <p class="video-description">Idea & Animation & Compositing</p>
                 </div>
             </div>
         </div>
@@ -971,7 +502,7 @@
     </div>
 
     <script>
-        // Lazy loading implementation for both iframes and videos
+        // Improved lazy loading with proper error handling
         const videoWrappers = document.querySelectorAll('.video-wrapper');
         
         const videoObserver = new IntersectionObserver((entries) => {
@@ -984,31 +515,30 @@
                     
                     if (iframe && iframe.dataset.src) {
                         iframe.src = iframe.dataset.src;
+                        iframe.style.display = 'block';
                         iframe.removeAttribute('data-src');
+                        
                         iframe.addEventListener('load', () => {
-                            if (placeholder) placeholder.remove();
+                            placeholder.remove();
                         });
+                        
+                        iframe.addEventListener('error', () => {
+                            placeholder.innerHTML = '<div class="error-message">Failed to load video</div>';
+                        });
+                        
                     } else if (video && video.dataset.src) {
-                        video.querySelector('source').src = video.dataset.src;
+                        const source = video.querySelector('source');
+                        source.src = video.dataset.src;
                         video.load();
+                        video.style.display = 'block';
                         video.removeAttribute('data-src');
-                        video.setAttribute('data-initial', 'true');
                         
-                        // Handle play/pause states
-                        video.addEventListener('play', () => {
-                            wrapper.classList.add('playing');
-                            video.removeAttribute('data-initial');
+                        video.addEventListener('loadedmetadata', () => {
+                            placeholder.remove();
                         });
                         
-                        video.addEventListener('pause', () => {
-                            if (video.currentTime === 0) {
-                                wrapper.classList.remove('playing');
-                                video.setAttribute('data-initial', 'true');
-                            }
-                        });
-                        
-                        video.addEventListener('loadeddata', () => {
-                            if (placeholder) placeholder.remove();
+                        video.addEventListener('error', () => {
+                            placeholder.innerHTML = '<div class="error-message">Video file not found</div>';
                         });
                     }
                     
@@ -1024,7 +554,7 @@
             videoObserver.observe(wrapper);
         });
 
-        // Smooth scroll behavior
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -1039,4 +569,3 @@
     </script>
 </body>
 </html>
-                            
